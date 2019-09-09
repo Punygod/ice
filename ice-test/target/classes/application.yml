@@ -1,0 +1,33 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 8762
+spring:
+  application:
+    name: service-hi
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://120.78.4.31:3306/spring-cloud-auth?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+    username: root
+    password: "^bZ4sGFZbF5N"
+  main:
+    allow-bean-definition-overriding: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+security:
+  oauth2:
+    resource:
+      # 获取当前Token的用户信息
+      user-info-uri: http://localhost:5000/uaa/users/current
+    client:
+      clientId: service-hi
+      clientSecret: 123456
+      # 获取Token
+      accessTokenUri: http://localhost:5000/uaa/oauth/token
+      grant-type: client_credentials,password
+      scope: server
